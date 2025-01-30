@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  backend:
+    image: rishabkumar7/devops-qr-code-backend:latest
+    container_name: qr-api
+    ports:
+      - "8080:80"  # Expose le backend sur http://localhost:8080
+    environment:
+      - PYTHONUNBUFFERED=1  # Parfois nécessaire pour les logs en temps réel
+    networks:
+      - qr-network
+
+  frontend:
+    image: rishabkumar7/devops-qr-code-frontend:latest
+    container_name: qr-frontend
+    ports:
+      - "3000:3000"  # Expose le frontend sur http://localhost:3000
+    networks:
+      - qr-network
+
+networks:
+  qr-network:
+    driver: bridge
